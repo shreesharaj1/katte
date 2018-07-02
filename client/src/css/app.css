@@ -110,3 +110,24 @@
   color: #385997;
   border-color: #385997;
 }
+
+/***********************************/
+.single-card {
+  border-width: 3px;
+  border-bottom-width: 50px;
+  border-radius: 5px;
+  padding: 10px;
+  width: 200px;
+  height: 250px;
+  border-style: solid;
+}
+
+.clubs, .spades {
+  border-color: #32475A;
+  color: #32475A;
+}
+
+.hearts, .diamonds {
+  border-color: #E41800;
+  color: #E41800;
+}

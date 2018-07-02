@@ -2,9 +2,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import CommentBox from './CommentBox';
+import Game from './containers/game';
 import registerServiceWorker from './registerServiceWorker';
 
-ReactDOM.render(<CommentBox />, document.getElementById('root'));
+ReactDOM.render(<Game />, document.getElementById('root'));
 
 registerServiceWorker();

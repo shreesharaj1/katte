@@ -5,6 +5,14 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import logger from 'morgan';
 import mongoose from 'mongoose';
+import { getSecret } from './secrets';
+
+// db config -- set your URI from mongo in secrets.js
+console.log(getSecret('dbUri'));
+mongoose.connect(getSecret('dbUri'));
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+
 
 // and create our instances
 const app = express();
