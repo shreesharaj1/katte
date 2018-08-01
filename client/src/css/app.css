@@ -131,3 +131,9 @@
   border-color: #E41800;
   color: #E41800;
 }
+
+.carpet {
+  background-image: url('../imgs/carpet.jpg');
+  height: 400px;
+  width: 300px;
+}
