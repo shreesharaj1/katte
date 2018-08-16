@@ -113,6 +113,7 @@
 
 /***********************************/
 .single-card {
+  background-color: #fff;
   border-width: 3px;
   border-bottom-width: 50px;
   border-radius: 5px;
@@ -120,6 +121,8 @@
   width: 200px;
   height: 250px;
   border-style: solid;
+  display: inline-block;
+  float: left;
 }
 
 .clubs, .spades {
@@ -134,6 +137,11 @@
 
 .carpet {
   background-image: url('../imgs/carpet.jpg');
+  background-size: 300px 400px;
   height: 400px;
   width: 300px;
+}
+
+.hand {
+  width: 100%;
 }
