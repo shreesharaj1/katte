@@ -113,6 +113,7 @@
 
 /***********************************/
 .single-card {
+  background-color: #fff;
   border-width: 3px;
   border-bottom-width: 50px;
   border-radius: 5px;
@@ -120,6 +121,8 @@
   width: 200px;
   height: 250px;
   border-style: solid;
+  display: inline-block;
+  float: left;
 }
 
 .clubs, .spades {
@@ -130,4 +133,25 @@
 .hearts, .diamonds {
   border-color: #E41800;
   color: #E41800;
+}
+
+.carpet {
+  background-image: url('../imgs/carpet.jpg');
+  background-size: 300px 400px;
+  background-repeat: no-repeat;
+  height: 400px;
+  width: 300px;
+  padding: 10px;
+}
+
+.carpet .single-card {
+  border-bottom-width: 10px;
+  width:50px;
+  height: 60px;
+  float: left;
+  font-size: 10px;
+}
+
+.hand {
+  width: 100%;
 }
