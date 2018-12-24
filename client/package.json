@@ -4,8 +4,8 @@
   "private": true,
   "dependencies": {
     "prop-types": "^15.6.1",
-    "react": "^16.4.0",
-    "react-dom": "^16.4.0",
+    "react": "^16.7.0-alpha.2",
+    "react-dom": "^16.7.0-alpha.2",
     "react-draggable": "^3.0.5",
     "react-markdown": "^3.3.3",
     "whatwg-fetch": "^2.0.4"

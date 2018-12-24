@@ -138,8 +138,18 @@
 .carpet {
   background-image: url('../imgs/carpet.jpg');
   background-size: 300px 400px;
+  background-repeat: no-repeat;
   height: 400px;
   width: 300px;
+  padding: 10px;
+}
+
+.carpet .single-card {
+  border-bottom-width: 10px;
+  width:50px;
+  height: 60px;
+  float: left;
+  font-size: 10px;
 }
 
 .hand {

@@ -1,57 +1,48 @@
 // Game.js
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import Card from '../components/card';
 import '../css/app.css';
 
-class Game extends Component {
-  constructor() {
-    super();
-    const handCards = [<Card onDragStart={(e)=>this.onDragStart(e, "c1")} suite="clubs" value="10" id="c1" key="c1" />,
-            <Card onDragStart={(e)=>this.onDragStart(e, "c2")} suite="hearts" value="J" id="c2" key="c2" />]
-    this.state = { matCards: [], handCards };
-  }
+export default function Game () {
+  const handCardsInit = [<Card onDragStart={(e)=>onDragStart(e, "c1")} suite="clubs" value="10" id="c1" key="c1" />,
+    <Card onDragStart={(e)=>onDragStart(e, "c2")} suite="hearts" value="J" id="c2" key="c2" />];
+  const [handCards, setHandCards] = useState(handCardsInit);
+  const [matCards, setMatCards] = useState();
 
-  onDragStart = (ev, id) => {
+  function onDragStart (ev, id) {
     console.log('dragstart:',id);
     ev.dataTransfer.setData("id", id);
   }
 
-  onDragOver = (ev) => {
+  function onDragOver (ev) {
       ev.preventDefault();
   }
 
-  onDrop = (ev, cat) => {
+  function onDrop (ev, cat) {
      let id = ev.dataTransfer.getData("id");
-     let handCards = this.state.handCards;
-     let matCards = this.state.matCards;
-     handCards = handCards.filter((card) => {
+     let newMatcards = matCards ? matCards : [];
+     let newHandCards = handCards.filter((card) => {
          if (card.props.id == id) {
-             matCards.push(card);
+             newMatcards.push(card);
              //handCards.remove(card);
              return false;
          }
          return true;
      });
-
-     this.setState({
-         handCards, matCards
-     });
+     setHandCards(newHandCards);
+     setMatCards(newMatcards);
   }
 
-  render() {
     return (
       <div className="container">
           <div className="hand">
-            {this.state.handCards}
+            {handCards}
            </div> 
           <div className="carpet" 
-            onDragOver={(e)=>this.onDragOver(e)}
-            onDrop={(e)=>this.onDrop(e, "complete")}>
-            {this.state.matCards}
+            onDragOver={(e)=>onDragOver(e)}
+            onDrop={(e)=>onDrop(e, "complete")}>
+            {matCards}
           </div>
       </div>
     );
-  }
 }
-
-export default Game;
