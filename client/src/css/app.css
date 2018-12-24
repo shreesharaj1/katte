@@ -1,5 +1,6 @@
 .container {
   background-color: #f1f1f1;
+  background: url("../imgs/wood_floor.jpg");
   box-sizing: border-box;
   padding: 25px;
   min-height: 100vh;
