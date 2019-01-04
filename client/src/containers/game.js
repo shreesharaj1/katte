@@ -38,16 +38,49 @@ class Game extends Component {
      });
   }
 
+  componentDidMount(){
+    var circle = document.getElementsByClassName('carpet')[0],
+    imgs = document.getElementsByClassName('player'),
+    total = imgs.length,
+    coords = {}, radius1;
+
+    // get circle diameter
+    // getBoundingClientRect outputs the actual px AFTER transform
+    //      using getComputedStyle does the job as we want
+    let diam = parseInt( window.getComputedStyle(circle).getPropertyValue('height') ),
+    radius = diam/2,
+    imgW = imgs[0].getBoundingClientRect().height,
+    // get the dimensions of the inner circle we want the images to align to
+    radius2 = radius + 100;
+
+    var i,
+        alpha = Math.PI / 2,
+        len = imgs.length,
+        corner = 2 * Math.PI / total;
+
+    // loop over the images and assign the correct css props
+    for ( i = 0 ; i < total; i++ ){
+      var offsetAngle = 360 / imgs.length;
+      var rotateAngle = offsetAngle * i;
+      imgs[i].style.transform = "rotate(" + rotateAngle + "deg) translate(" + radius + "px, 0px) rotate(-" + rotateAngle + "deg)";
+      //imgs[i].style.top =  parseInt( ( radius - imgW / 2 ) - ( radius2 * Math.sin( alpha ) ) ) + 'px'
+
+      alpha = alpha - corner;
+    }
+  }
+
   render() {
     return (
       <div className="container">
           <div className="hand">
-            {this.state.handCards}
+            {/*this.state.handCards*/}
            </div> 
           <div className="carpet" 
             onDragOver={(e)=>this.onDragOver(e)}
             onDrop={(e)=>this.onDrop(e, "complete")}>
             {this.state.matCards}
+            <div class="player">P</div>
+            <div class="player">P</div>
           </div>
       </div>
     );
