@@ -49,23 +49,26 @@ class Game extends Component {
     //      using getComputedStyle does the job as we want
     let diam = parseInt( window.getComputedStyle(circle).getPropertyValue('height') ),
     radius = diam/2,
-    imgW = imgs[0].getBoundingClientRect().height,
+    imgW = imgs[0].getBoundingClientRect().height;
     // get the dimensions of the inner circle we want the images to align to
-    radius2 = radius + 100;
 
-    var i,
-        alpha = Math.PI / 2,
-        len = imgs.length,
-        corner = 2 * Math.PI / total;
 
     // loop over the images and assign the correct css props
-    for ( i = 0 ; i < total; i++ ){
-      var offsetAngle = 360 / imgs.length;
-      var rotateAngle = offsetAngle * i;
-      imgs[i].style.transform = "rotate(" + rotateAngle + "deg) translate(" + radius + "px, 0px) rotate(-" + rotateAngle + "deg)";
-      //imgs[i].style.top =  parseInt( ( radius - imgW / 2 ) - ( radius2 * Math.sin( alpha ) ) ) + 'px'
+   
 
-      alpha = alpha - corner;
+
+      let outerRadius = diam / 2
+      , innerRadius = (outerRadius - (-50)) - imgW
+      , alpha = Math.PI / 2
+      , corner = 2 * Math.PI / total
+      ;
+
+  for ( let i = 0; i < total; i++ ){
+
+    imgs[i].style.left = parseInt( ( outerRadius - imgW / 2 ) + ( innerRadius * Math.cos( alpha ) ) -50) + 'px';
+    imgs[i].style.top = parseInt( ( outerRadius - imgW / 2 ) - ( innerRadius * Math.sin( alpha ) ) )+ 'px';
+
+    alpha = alpha - corner;
     }
   }
 
@@ -79,6 +82,8 @@ class Game extends Component {
             onDragOver={(e)=>this.onDragOver(e)}
             onDrop={(e)=>this.onDrop(e, "complete")}>
             {this.state.matCards}
+            <div class="player">P</div>
+            <div class="player">P</div>
             <div class="player">P</div>
             <div class="player">P</div>
           </div>
