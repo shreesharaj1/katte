@@ -15,15 +15,22 @@
 /***********************************/
 .single-card {
   background-color: #fff;
-  border-width: 3px;
-  border-bottom-width: 50px;
+  border-width: 2px;
+  border-bottom-width: 8px;
   border-radius: 5px;
   padding: 10px;
-  width: 200px;
-  height: 250px;
+  width: 40px;
+  height: 80px;
   border-style: solid;
-  display: inline-block;
   float: left;
+}
+
+.suite-text {
+  align-self: flex-start;
+}
+
+.value-text {
+  align-self: flex-end;
 }
 
 .clubs, .spades {
@@ -36,18 +43,31 @@
   color: #E41800;
 }
 
+.game-area {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  /* bring your own prefixes */
+  transform: translate(-50%, -50%);
+  position: fixed;
+  height: 400px;
+  width: 300px;
+}
+
 .carpet {
   background-image: url('../imgs/carpet.jpg');
   background-size: 300px 400px;
   background-repeat: no-repeat;
   height: 400px;
   width: 300px;
-  padding: 10px;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  /* bring your own prefixes */
-  transform: translate(-50%, -50%);
+}
+
+.carpet-absolute {
+  background-size: 300px 400px;
+  background-repeat: no-repeat;
+  height: 400px;
+  width: 300px;
+  position: absolute;
 }
 
 .carpet .single-card {

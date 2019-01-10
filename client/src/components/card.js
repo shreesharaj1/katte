@@ -8,17 +8,13 @@ class Card extends React.Component {
     
     return (
       <div onDragStart={this.props.onDragStart} draggable className={`single-card ${this.props.suite}`}>
-        <div className="textContent">
-          <h3>{this.props.suite}</h3>
-          <h3 className="text">{this.props.value}</h3>
-        </div>
+        <div className="suite-text">{this.props.suite}</div>
+        <div className="value-text">{this.props.value}</div>
       </div>
     );
 
-  Comment.propTypes = {
-    author: PropTypes.string.isRequired,
-    children: PropTypes.string.isRequired,
-    timestamp: PropTypes.string.isRequired,
+  Card.propTypes = {
+    suite: PropTypes.string,
     };
   }
 }
