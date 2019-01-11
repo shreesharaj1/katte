@@ -23,6 +23,12 @@
   height: 80px;
   border-style: solid;
   float: left;
+  margin-left: -40px;
+}
+
+.single-card :before,
+.single-card :after {
+  content: attr(value) ' ♠';
 }
 
 .suite-text {
@@ -50,7 +56,7 @@
   /* bring your own prefixes */
   transform: translate(-50%, -50%);
   position: fixed;
-  height: 400px;
+  height: auto;
   width: 300px;
 }
 
@@ -60,6 +66,7 @@
   background-repeat: no-repeat;
   height: 400px;
   width: 300px;
+  position: absolute;
 }
 
 .carpet-absolute {
@@ -67,7 +74,7 @@
   background-repeat: no-repeat;
   height: 400px;
   width: 300px;
-  position: absolute;
+  position: relative;
 }
 
 .carpet .single-card {
@@ -80,6 +87,7 @@
 
 .hand {
   width: 100%;
+  display: inline-flex;
 }
 
 .player {
