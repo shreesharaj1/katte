@@ -17,6 +17,9 @@ class Game extends Component {
     for( let s = 0; s < suits.length; s++ ) {
         for( let n = 0; n < names.length; n++ ) {
             cards.push( <Card onDragStart={(e)=>this.onDragStart(e, suits[s][0]+names[n])} 
+              onMouseDown={(e)=> this.onMouseDown(e)}
+              onMouseUp={(e)=> this.onMouseUp(e)}
+              onDragEnd={(e)=> this.onDragEnd(e)}
               suite={suits[s]} value={names[n]} id={suits[s][0]+names[n]} key={suits[s][0]+names[n]} />);
         }
     }
@@ -55,6 +58,20 @@ class Game extends Component {
          handCards, matCards
      });
   }
+
+  onMouseDown = (ev)=> {
+    console.log("ev");
+    ev.target.style.zIndex=1;
+  }
+
+  onMouseUp = (ev)=> {
+    console.log("sd");
+    ev.target.style.zIndex=0;
+  }
+
+  onDragEnd = (ev) => {
+    ev.target.style.zIndex=0;
+}
 
   componentDidMount(){
     var circle = document.getElementsByClassName('carpet')[0],

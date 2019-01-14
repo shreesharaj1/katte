@@ -7,9 +7,14 @@ class Card extends React.Component {
   render() {
     
     return (
-      <div value={this.props.value} onDragStart={this.props.onDragStart} draggable className={`single-card ${this.props.suite}`}>
-        <div className="value-text">{this.props.value}</div>
-        <div className="suite-text">{this.props.suite}</div>
+      <div value={this.props.value} 
+        onDragStart={this.props.onDragStart} 
+        onMouseDown={(e)=> this.props.onMouseDown(e)}
+        onMouseUp={(e)=> this.props.onMouseUp(e)}
+        onDragEnd={(e)=> this.props.onDragEnd(e)}
+        draggable className={`single-card ${this.props.suite}`}>
+        <div value={this.props.value} className="value-text"></div>
+        <h1 suite={this.props.suites} className="suite-image"></h1>
       </div>
     );
 

@@ -15,20 +15,24 @@
 /***********************************/
 .single-card {
   background-color: #fff;
-  border-width: 2px;
-  border-bottom-width: 8px;
   border-radius: 5px;
-  padding: 10px;
+  padding: 4px 10px 10px 2px;
   width: 40px;
   height: 80px;
-  border-style: solid;
   float: left;
-  margin-left: -40px;
+  display: flex;
+  box-shadow: 0 0 5px rgba(0,0,0,.5);
+  z-index: 0;
 }
 
-.single-card :before,
-.single-card :after {
-  content: attr(value) ' ♠';
+.hand .single-card {
+  margin: 0 auto;
+  margin-left: -30px;
+}
+
+.single-card::after {
+  text-align: end;
+  width: 12px;
 }
 
 .suite-text {
@@ -40,14 +44,29 @@
 }
 
 .clubs, .spades {
-  border-color: #32475A;
   color: #32475A;
 }
 
 .hearts, .diamonds {
-  border-color: #E41800;
   color: #E41800;
 }
+
+.hearts::after {
+  content: attr(value) ' ♥';
+}
+
+.spades::after {
+  content: attr(value) ' ♠';
+}
+
+.clubs::after {
+  content: attr(value) ' ♣';
+}
+
+.diamonds::after {
+  content: attr(value) ' ♦';
+}
+
 
 .game-area {
   position: fixed;
@@ -75,6 +94,7 @@
   height: 400px;
   width: 300px;
   position: relative;
+  padding: 10px;
 }
 
 .carpet .single-card {
@@ -88,6 +108,7 @@
 .hand {
   width: 100%;
   display: inline-flex;
+  margin: 20px 30px;
 }
 
 .player {
