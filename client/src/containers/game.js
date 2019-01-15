@@ -1,6 +1,7 @@
 // Game.js
 import React, { Component } from 'react';
 import Card from '../components/card';
+import Player from '../components/player';
 import '../css/app.css';
 
 class Game extends Component {
@@ -23,9 +24,19 @@ class Game extends Component {
               suite={suits[s]} value={names[n]} id={suits[s][0]+names[n]} key={suits[s][0]+names[n]} />);
         }
     }
+    let uniqueRandom = [];
     for(let i = 0; i < 13; i++) {
-      handCards.push(cards[this.randomCardIndex()]);
+      let randomIndex = this.randomCardIndex();
+      if(!uniqueRandom.includes(randomIndex)) {
+        uniqueRandom.push(randomIndex);
+      }
     }
+    uniqueRandom.sort(function(a, b) {
+      return a - b;
+    });
+    uniqueRandom.map((r)=> {
+      handCards.push(cards[r]);
+    })
     this.state = { matCards: [], handCards };
   }
 
@@ -106,8 +117,8 @@ class Game extends Component {
       <div className="container">
         <div className="game-area">
           <div className="carpet">
-            <div className="player">P</div>
-            <div className="player">P</div>
+              <Player/>
+            <Player/>
             <div className="player">P</div>
           </div>
           <div className="carpet-absolute" 

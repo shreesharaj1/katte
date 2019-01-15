@@ -114,3 +114,16 @@
 .player {
   position: absolute;
 }
+
+.card-back {
+  width: 52px;
+  height: 94px;
+  transform: translateY(-100%) rotate(90deg);
+  background: #fff;
+  border-radius: 5px;
+}
+
+.card-back img {
+  width: 100%;
+  height: 100%;
+}
