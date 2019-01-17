@@ -117,8 +117,10 @@ class Game extends Component {
       <div className="container">
         <div className="game-area">
           <div className="carpet">
-              <Player/>
-            <Player/>
+         
+            <div className="player">P</div>
+            <div className="player">P</div>
+            <div className="player">P</div>
             <div className="player">P</div>
           </div>
           <div className="carpet-absolute" 
