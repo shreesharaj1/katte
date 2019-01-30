@@ -10,12 +10,13 @@ class Player extends React.Component {
     return (
       <div className="player">
           <div className="card-back"><img src={BackImg}/></div>
-          <div className="card-back"></div>
-          <div className="card-back"></div>
-          <div className="card-back"></div>
-          <div className="card-back"></div>
-          <div className="card-back"></div>
-          <div className="card-back"></div>
+          <div className="card-back"><img src={BackImg}/></div>
+          <div className="card-back"><img src={BackImg}/></div>
+          <div className="card-back"><img src={BackImg}/></div>
+          <div className="card-back"><img src={BackImg}/></div>
+          <div className="card-back"><img src={BackImg}/></div>
+          <div className="card-back"><img src={BackImg}/></div>
+          <div className="card-back"><img src={BackImg}/></div>
       </div>
     );
 

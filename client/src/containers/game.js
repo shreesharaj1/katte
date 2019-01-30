@@ -94,7 +94,7 @@ class Game extends Component {
     //      using getComputedStyle does the job as we want
     let diam = parseInt( window.getComputedStyle(circle).getPropertyValue('height') ),
     radius = diam/2,
-    imgW = imgs[0].getBoundingClientRect().height;
+    imgW = imgs[0].getBoundingClientRect().width;
     // get the dimensions of the inner circle we want the images to align to
     // loop over the images and assign the correct css props
       let outerRadius = diam / 2
@@ -117,11 +117,9 @@ class Game extends Component {
       <div className="container">
         <div className="game-area">
           <div className="carpet">
-         
-            <div className="player">P</div>
-            <div className="player">P</div>
-            <div className="player">P</div>
-            <div className="player">P</div>
+            <Player />
+            <Player />
+            <Player />
           </div>
           <div className="carpet-absolute" 
             onDragOver={(e)=>this.onDragOver(e)}
