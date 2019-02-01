@@ -122,8 +122,12 @@
   width: 80px;
 }
 
+.card-back:first-child {
+  margin-top: 0px;
+}
 
 .card-back {
+  -webkit-transition: all 1s;
   width: 46px;
   height: 80px;
   transform: translateY(-100%) rotate(90deg);

@@ -93,20 +93,28 @@ class Game extends Component {
     // getBoundingClientRect outputs the actual px AFTER transform
     //      using getComputedStyle does the job as we want
     let diam = parseInt( window.getComputedStyle(circle).getPropertyValue('height') ),
-    radius = diam/2,
-    imgW = imgs[0].getBoundingClientRect().width;
+    //radius = diam/2,
+    imgW = imgs[0].getBoundingClientRect().height;
     // get the dimensions of the inner circle we want the images to align to
     // loop over the images and assign the correct css props
       let outerRadius = diam / 2
-      , innerRadius = (outerRadius - (-50)) - imgW
+      , innerRadius = (outerRadius - (-70)) - imgW
       , alpha = Math.PI / 2
       , corner = 2 * Math.PI / total
       ;
+var a =36;
 
+
+var startAngle = Math.PI / imgs.length,
+angle = startAngle / 2,
+radius = 300,
+offset = 120;
   for ( let i = 0; i < total; i++ ){
-
-    imgs[i].style.left = parseInt( ( outerRadius - imgW / 2 ) + ( innerRadius * Math.cos( alpha ) ) -50) + 'px';
-    imgs[i].style.top = parseInt( ( outerRadius - imgW / 2 ) - ( innerRadius * Math.sin( alpha ) ) )+ 'px';
+    imgs[i].style.left = radius * Math.cos( angle ) + offset + "px";
+    imgs[i].style.top = -1*(radius * Math.sin( angle )) + 300+ "px";
+    angle += startAngle;
+    // imgs[i].style.left = parseInt( ( outerRadius - imgW / 2 ) + ( innerRadius * Math.cos( alpha ) ) -50) + 'px';
+    // imgs[i].style.top = parseInt( ( outerRadius - imgW / 2 ) - ( innerRadius * Math.sin( alpha ) ) )+ 'px';
 
     alpha = alpha - corner;
     }
@@ -117,7 +125,6 @@ class Game extends Component {
       <div className="container">
         <div className="game-area">
           <div className="carpet">
-            <Player />
             <Player />
             <Player />
           </div>
