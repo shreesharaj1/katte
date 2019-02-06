@@ -75,11 +75,10 @@
 
 
 .game-area {
-  position: fixed;
   top: 50%;
   left: 50%;
   /* bring your own prefixes */
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -46%);
   position: fixed;
   height: auto;
   width: 300px;

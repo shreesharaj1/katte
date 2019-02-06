@@ -5,8 +5,8 @@ import Player from '../components/player';
 import '../css/app.css';
 
 class Game extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     //const handCards = [<Card onDragStart={(e)=>this.onDragStart(e, "c1")} suite="clubs" value="10" id="c1" key="c1" />,
     //        <Card onDragStart={(e)=>this.onDragStart(e, "c2")} suite="hearts" value="J" id="c2" key="c2" />]
     //this.state = { matCards: [], handCards };
@@ -34,14 +34,22 @@ class Game extends Component {
     uniqueRandom.sort(function(a, b) {
       return a - b;
     });
+    console.log('aa',uniqueRandom);
     uniqueRandom.map((r)=> {
       handCards.push(cards[r]);
     })
     this.state = { matCards: [], handCards };
+    this.onDrop = this.onDrop.bind(this);
+    this.randomCardIndex = this.randomCardIndex.bind(this);
+    this.onDragStart = this.onDragStart.bind(this);
+    this.onDragOver = this.onDragOver.bind(this);
+    this.onMouseDown = this.onMouseDown.bind(this);
+    this.onMouseUp = this.onMouseUp.bind(this);
+    this.onDragEnd = this.onDragEnd.bind(this);
   }
 
   randomCardIndex = () => {
-    return Math.floor(Math.random() * 52) + 1;
+    return Math.floor(Math.random() * 51) + 1;
   }
 
   onDragStart = (ev, id) => {
@@ -54,10 +62,22 @@ class Game extends Component {
   }
 
   onDrop = (ev, cat) => {
+    if(this == undefined){
+      console.log(cat);
+      this.sa;
+    }
      let id = ev.dataTransfer.getData("id");
      let handCards = this.state.handCards;
      let matCards = this.state.matCards;
+     if(this == undefined){
+      console.log("cat");
+      console.log(this);
+    }
      handCards = handCards.filter((card) => {
+      if(card == undefined){
+        console.log("cat");
+        console.log(handCards);
+      }
          if (card.props.id == id) {
              matCards.push(card);
              return false;
@@ -125,6 +145,7 @@ offset = 120;
       <div className="container">
         <div className="game-area">
           <div className="carpet">
+            <Player />
             <Player />
             <Player />
           </div>
