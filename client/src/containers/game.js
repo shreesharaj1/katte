@@ -62,10 +62,6 @@ class Game extends Component {
   }
 
   onDrop = (ev, cat) => {
-    if(this == undefined){
-      console.log(cat);
-      this.sa;
-    }
      let id = ev.dataTransfer.getData("id");
      let handCards = this.state.handCards;
      let matCards = this.state.matCards;

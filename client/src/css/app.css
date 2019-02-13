@@ -139,3 +139,23 @@
   width: 100%;
   height: 100%;
 }
+
+.home-background {
+  background: url('../imgs/badekila_full.jpg');
+  width:100%;
+  height: 100vh;
+  background-size: 100% 100vh;
+}
+
+.layer {
+  background-color: rgba(0, 0, 0, 0.7);
+  /* position: absolute; */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.home-background .layer label {
+  color: #fff;
+}
