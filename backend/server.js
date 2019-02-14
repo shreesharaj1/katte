@@ -7,6 +7,11 @@ import logger from 'morgan';
 import mongoose from 'mongoose';
 import { getSecret } from './secrets';
 
+const session = require('express-session')
+const dbConnection = require('./database') 
+const MongoStore = require('connect-mongo')(session)
+const passport = require('./passport');
+
 // db config -- set your URI from mongo in secrets.js
 console.log(getSecret('dbUri'));
 mongoose.connect(getSecret('dbUri'));
@@ -33,6 +38,26 @@ router.get('/', (req, res) => {
 // Use our router configuration when we call /api
 app.use('/api', router);
 
+// Route requires
+const user = require('./routes/user')
+// Sessions
+app.use(
+	session({
+		secret: 'fraggle-rock', //pick a random string to make the hash that is generated secure
+		store: new MongoStore({ mongooseConnection: dbConnection }),
+		resave: false, //required
+		saveUninitialized: false //required
+	})
+)
+
+// Passport
+app.use(passport.initialize())
+app.use(passport.session()) // calls the deserializeUser
+
+// Routes
+app.use('/user', user)
+
+// Starting Server 
 app.listen(API_PORT, () => console.log(`Listening on port ${API_PORT}`));
 
 
@@ -80,3 +105,4 @@ io.on('connection', function (client) {
     console.log(err)
   })
 })
+
