@@ -16,13 +16,13 @@ function Signup() {
     
 
 		//request to server to add a new username/password
-		axios.post('http://localhost:3001/user/', {
+		axios.post('http://localhost:3006/user/', {
 			username: username,
 			password: password
 		})
 			.then(response => {
 				console.log(response)
-				if (!response.data.errmsg) {
+				if (!response.data.error) {
 					console.log('successful signup')
 					this.setState({ //redirect to login page
 						redirectTo: '/login'
