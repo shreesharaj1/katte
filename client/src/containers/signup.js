@@ -5,9 +5,9 @@ import '../css/uikit.min.css';
 import Jaggery from '../imgs/jaggery.png';
 
 function Signup() {
-    const [username, setUsername] = useState();
-    const [email, setEmail] = useState();
-    const [password, setPassword] = useState();
+    const [username, setUsername] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
     
     function handleSubmit(event) {
 		console.log('sign-up handleSubmit, username: ');
@@ -17,8 +17,9 @@ function Signup() {
 
 		//request to server to add a new username/password
 		axios.post('http://localhost:3006/user/', {
-			username: username,
-			password: password
+            username,
+            email,
+            password
 		})
 			.then(response => {
 				console.log(response)
@@ -39,7 +40,9 @@ function Signup() {
     return (
     <div className="home-background">
         <div className="layer">
+        <div className="uk-alert">Hi</div>
             <div className="uk-grid uk-position-center">
+                
                 <form className="uk-form-stacked" onSubmit={(e) => handleSubmit(e)}>
                     <div className="uk-margin">
                         <label className="uk-form-label" htmlFor="Username">Username</label>
@@ -47,6 +50,7 @@ function Signup() {
                             <input className="uk-input uk-form-width-large" id="Username" 
                                 type="text"
                                 placeholder="Username"
+                                required
                                 value={username}
                                 onChange={(e) => setUsername(e.target.value)}/>
                         </div>
@@ -57,6 +61,7 @@ function Signup() {
                             <input className="uk-input uk-form-width-large" id="Email" 
                                 type="text"
                                 placeholder="Email"
+                                required
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}/>
                         </div>
@@ -67,6 +72,7 @@ function Signup() {
                             <input className="uk-input uk-form-width-large" id="Password" 
                                 type="password" 
                                 placeholder="Password"
+                                required
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}/>
                         </div>

@@ -14,18 +14,19 @@ router.post('/', (req, res) => {
     res.set('Access-Control-Allow-Origin', '*');
     const { username, password } = req.body
     // ADD VALIDATION
-    User.findOne({ username: username }, (err, user) => {
+    User.findOne({ email }, (err, user) => {
         if (err) {
             console.log('User.js post error: ', err)
         } else if (user) {
             res.json({
-                error: `Sorry, already a user with the username: ${username}`
+                error: `Sorry, already a user with the email: ${email}`
             })
         }
         else {
             const newUser = new User({
-                username: username,
-                password: password
+                username,
+                email,
+                password
             })
             newUser.save((err, savedUser) => {
                 if (err) return res.json(err)
