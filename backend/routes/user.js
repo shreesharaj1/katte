@@ -12,7 +12,7 @@ router.options('/', (req,res) => {
 router.post('/', (req, res) => {
     console.log('user signup--');
     res.set('Access-Control-Allow-Origin', '*');
-    const { username, password } = req.body
+    const { username, email, password } = req.body
     // ADD VALIDATION
     User.findOne({ email }, (err, user) => {
         if (err) {

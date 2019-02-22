@@ -4,32 +4,30 @@ import axios from 'axios';
 import '../css/uikit.min.css';
 import Jaggery from '../imgs/jaggery.png';
 
-function Signup() {
-    const [username, setUsername] = useState('');
+function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState(false);
     
     function handleSubmit(event) {
 		console.log('sign-up handleSubmit, username: ');
-		console.log(username);
+		console.log(email);
         event.preventDefault();
     
 
 		//request to server to add a new username/password
-		axios.post('http://localhost:3006/user/', {
-            username,
+		axios.post('http://localhost:3006/user/login', {
             email,
             password
 		})
 			.then(response => {
 				console.log(response)
 				if (!response.data.error) {
-					console.log('successful signup')
+					console.log('successful login')
 					
 				} else {
                     setError(true);
-					console.log('username already taken')
+					console.log('something went wrong')
 				}
 			}).catch(error => {
 				console.log('signup error: ')
@@ -42,17 +40,6 @@ function Signup() {
         <div className="layer">
             <div className="uk-grid uk-position-center">
                 <form className="uk-form-stacked" onSubmit={(e) => handleSubmit(e)}>
-                    <div className="uk-margin">
-                        <label className="uk-form-label" htmlFor="Username">Username</label>
-                        <div className="uk-form-controls">
-                            <input className="uk-input uk-form-width-large" id="Username" 
-                                type="text"
-                                placeholder="Username"
-                                required
-                                value={username}
-                                onChange={(e) => setUsername(e.target.value)}/>
-                        </div>
-                    </div>
                     <div className="uk-margin">
                         <label className="uk-form-label" htmlFor="Email">Email</label>
                         <div className="uk-form-controls">
@@ -75,12 +62,12 @@ function Signup() {
                                 onChange={(e) => setPassword(e.target.value)}/>
                         </div>
                     </div>
-                    <button className="uk-button uk-button-primary uk-width-1-1">Signup</button>
+                    <button className="uk-button uk-button-primary uk-width-1-1">Login</button>
                     {error &&
                         <div className="uk-margin uk-form-width-large">
                             <div className="uk-alert-danger uk-alert" uk-alert="true">
                                 <a class="uk-alert-close" uk-close="true"></a>
-                                <p>Email is already registered. Contact Shreesh for help.(Until reset password is implemented)</p>
+                                <p>Wrong email ID or Password.</p>
                             </div>
                         </div>
                             
@@ -95,5 +82,5 @@ function Signup() {
     )
 }
 
-export default Signup;    
+export default Login;    
     
