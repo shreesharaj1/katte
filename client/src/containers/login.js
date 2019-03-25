@@ -32,8 +32,9 @@ function Login(props, context) {
 					console.log('something went wrong')
 				}
 			}).catch(error => {
-				console.log('signup error: ')
-				console.log(error)
+				console.log('login error: ')
+                console.log(error);
+                setError(true);
 
 			})
 	}
