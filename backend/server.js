@@ -8,10 +8,10 @@ import mongoose from 'mongoose';
 import { getSecret } from './secrets';
 
 const session = require('express-session')
+const morgan = require('morgan')
 const dbConnection = require('./database') 
 const MongoStore = require('connect-mongo')(session)
 const passport = require('./passport');
-
 // db config -- set your URI from mongo in secrets.js
 console.log('haa',getSecret('dbUri'));
 mongoose.connect(getSecret('dbUri')); 
@@ -26,27 +26,27 @@ const router = express.Router();
 // set our port to either a predetermined port number if you have set it up, or 3001
 const API_PORT = process.env.API_PORT || 3006;
 // now we should configure the API to use bodyParser and look for JSON data in the request body
+app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(logger('dev'));
 
-// now we can set the route path & initialize the API
-router.get('/', (req, res) => {
-  res.json({ message: 'Hello, World!' });
-});
-
 // Use our router configuration when we call /api
-app.use('/api', router);
+//app.use('/api', router);
 
 // Route requires
 const user = require('./routes/user')
 // Sessions
 app.use(
 	session({
-		secret: 'fraggle-rock', //pick a random string to make the hash that is generated secure
+		secret: 'shreesh', //pick a random string to make the hash that is generated secure
 		store: new MongoStore({ mongooseConnection: dbConnection }),
-		resave: false, //required
-		saveUninitialized: false //required
+		resave: true, //required
+    saveUninitialized: false, //required
+    cookie: {
+      sameSite: false, // i think this is default to false
+      maxAge: 60 * 60 * 1000 * 1000
+    }
 	})
 )
 
@@ -59,12 +59,13 @@ app.use(passport.session()) // calls the deserializeUser
 function setupCORS(req, res, next) {
   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
   res.header('Access-Control-Allow-Headers', 'X-Requested-With, Content-type,Accept,X-Access-Token,X-Key');
-  res.header('Access-Control-Allow-Origin', '*');
-  if (req.method === 'OPTIONS') {
-      res.status(200).end();
-  } else {
+  res.header('Access-Control-Allow-Origin', 'http://localhost:3005');
+  res.header('Access-Control-Allow-Credentials', 'true');
+  // if (req.method === 'OPTIONS') {
+  //     res.status(200).end();
+  // } else {
       next();
-  }
+  // }
 }
 app.all('/*', setupCORS);
 

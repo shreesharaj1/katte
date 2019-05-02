@@ -11,7 +11,7 @@ function Root() {
   const [username, setUsername] = useState('');
 
   useEffect((() => {
-    axios.get('http://localhost:3006/user/').then(response => {
+    axios.get('http://localhost:3006/user/', {withCredentials: true}).then(response => {
       console.log('Get user response: ')
       console.log(response.data)
       if (response.data.user) {
