@@ -18,7 +18,7 @@ function Signup(props, context) {
     
 
 		//request to server to add a new username/password
-		axios.post('http://localhost:3006/user/', {
+		axios.post('http://localhost:8080/api/user/', {
             username,
             email,
             password
@@ -89,7 +89,7 @@ function Signup(props, context) {
                         }
                     </form>
                     <div>
-                        {/* <img src={Jaggery}/> */}
+                        { <img src={Jaggery}/> }
                     </div>
                 </div>
             </div>     

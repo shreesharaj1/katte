@@ -1,4 +1,4 @@
-.container {
+.game-container {
   background-color: #f1f1f1;
   background: url("../imgs/wood_floor.jpg");
   box-sizing: border-box;
@@ -33,7 +33,7 @@
 
 .hand .single-card {
   margin: 0 auto;
-  margin-left: -30px;
+  margin-left: -26px;
 }
 
 .single-card::after {
@@ -99,7 +99,11 @@
   height: 400px;
   width: 300px;
   position: relative;
-  padding: 10px;
+  padding: 120px 10px 10px;
+}
+
+.carpet-absolute .single-card {
+  margin: 15px;
 }
 
 .carpet .single-card {
@@ -111,28 +115,30 @@
 }
 
 .hand {
-  width: 100%;
   display: inline-flex;
-  margin: 20px 30px;
+  margin: 20px auto;
+  transform: translateX(calc((300px - 100%)/2 + 10px));
 }
 
 .player {
   position: absolute;
-  width: 80px;
+  width: 100px;
+  margin-left: -10px;
 }
 
 .card-back:first-child {
-  margin-top: 0px;
+  margin-top: 10px;
 }
 
 .card-back {
-  -webkit-transition: all 1s;
+  float: left;
+  -webkit-transition: all 0.4s;
+  /* transform: translateY(-100%) rotate(90deg); */
   width: 46px;
   height: 80px;
-  transform: translateY(-100%) rotate(90deg);
   background: #fff;
   border-radius: 5px;
-  margin-top: -70px;
+  margin: 8px -41px 0 0;
 }
 
 .card-back img {
@@ -158,4 +164,208 @@
 
 .home-background .layer label {
   color: #fff;
+}
+
+.welcome-bar {
+  padding: 70px 0 20px 0;
+}
+
+.welcome-text {
+  font-size: 50pt;
+  line-height: 56pt;
+  font-weight: 200;
+  color: #cacaca;
+  padding-top: 20px;
+}
+
+.card-btn.uk-card-body {
+  cursor: pointer;
+}
+
+.uk-container-center .card-btn.uk-card-body {
+  font-size: 40pt;
+  font-weight: 200;
+  text-align: center;
+  padding: 30px 0;
+  cursor: pointer;
+  width: 132px;
+  height: 140px;;
+}
+
+.card-btn.uk-card-body:hover, .card-btn.uk-card-body.card-btn-active {
+  background-color: #000;
+}
+
+.card-btn.uk-card-body .uk-card-title {
+  font-size: 25pt;
+  line-height: 28pt;
+  font-weight: 200;
+}
+
+.big-input {
+  height: 0px;
+  -webkit-transition: height 1s linear;
+     -moz-transition: height 1s linear;
+      -ms-transition: height 1s linear;
+       -o-transition: height 1s linear;
+          transition: height 1s linear;
+}
+
+.big-input.open {
+   height: 50px;
+   -webkit-transition: height 1s linear;
+      -moz-transition: height 1s linear;
+       -ms-transition: height 1s linear;
+        -o-transition: height 1s linear;
+           transition: height 1s linear;
+           padding: 0 5px;
+}
+
+.join-submit.uk-button {
+  margin-top: 7px;
+}
+
+.k-modal .modal-content {
+  border-radius: 0;
+}
+
+.k-modal .modal-title {
+  font-weight: 300;
+}
+
+.k-modal .text-warning {
+  font-size: 0.5rem;
+  width: 50px;
+  height: 50px;
+}
+
+.row+.row {
+  margin-top: 1rem;
+}
+
+.creating-txt {
+  font-size: 1.5rem;
+  text-align: center;
+  margin: 10px 0;
+  font-weight: 200;
+}
+
+[aria-label="timer"] {
+  width: 90px;
+  background: #4a3905;
+  border-radius: 44px;
+}
+
+.avatar {
+  width: 70px;
+}
+
+.self_player {
+  position: absolut;
+}
+.self_player [aria-label="timer"] {
+  margin: 0 auto;
+}
+
+.wait_modal {
+  padding: 30px;
+}
+
+.player_name {
+  color: black;
+  text-align: center;
+  margin: 3px 0 -4px 1px;
+  font-size: 17px;
+  background: white;
+  border-radius: 30px;
+  width: fit-content;
+  padding: 5px 15px;
+}
+
+.self_player .player_name {
+  margin: 5px auto 0;
+}
+
+.timer_text {
+  text-align: center;
+}
+
+.join_list {
+  list-style: kannada;
+  width: 80%;
+  margin: 13px auto;
+}
+
+[aria-label="begin_timer"] {
+  margin: 0 auto;
+}
+
+.side_cards {
+  position: absolute;
+  bottom: 0;
+  right: 44px;
+}
+
+.avatar_overlay {
+  position: absolute;
+  width: 76px;
+  height: 76px;
+  background: #ffe200;
+  top: 7px;
+  left: 7px;
+  border-radius: 37px;
+  opacity: 0.8;
+
+  animation: Pulsate 4s linear infinite;
+}
+
+@keyframes Pulsate {
+  from { opacity: 1; }
+  50% { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.side_cards .card-back {
+  transform: translate(-121px, -183px);
+  margin-right: 10px;
+}
+
+.side_cards .card-back-enter-done {
+  transform: translate(0);
+  margin-right: -41px;
+}
+
+.crown_holder {
+  width: 100%;
+  text-align: center;
+  margin-top: -50px;
+}
+
+.crown {
+  width: 80px;
+  margin-bottom: -30px;
+}
+
+.player .crown {
+  margin-left: -10px;
+}
+
+.place_holder {
+  width: 100%;
+  text-align: center;
+  margin-top: -37px;
+}
+
+.place {
+  font-weight: 300;
+}
+
+.katte {
+  width: 100%;
+}
+
+.katte_text {
+  text-align: center;
+  font-weight: 200;
+  color: #b53108;
 }
