@@ -11,18 +11,19 @@ function Signup(props, context) {
     const [password, setPassword] = useState('');
     const [error, setError] = useState(false);
     const [success, setSuccess] = useState(false);
-    function handleSubmit(event) {
-		console.log('sign-up handleSubmit, username: ');
-		console.log(username);
-        event.preventDefault();
     
+    function handleSubmit(event) {
+      console.log('sign-up handleSubmit, username: ');
+      console.log(username);
+          event.preventDefault();
+      
 
-		//request to server to add a new username/password
-		axios.post('http://localhost:8080/api/user/', {
-            username,
-            email,
-            password
-		})
+      //request to server to add a new username/password
+      axios.post('api/user/', {
+              username,
+              email,
+              password
+      })
 			.then(response => {
 				console.log(response)
 				if (!response.data.error) {
@@ -37,7 +38,7 @@ function Signup(props, context) {
 				console.log(error)
 
 			})
-	}
+	  }
     return (
     <div>{ success ? <Redirect to="/login"/> : 
         <div className="home-background">

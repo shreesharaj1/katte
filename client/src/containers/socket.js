@@ -2,7 +2,7 @@ const io = require('socket.io-client')
 
 
 export default function () {
-  const socket = io.connect('http://localhost:8080', { pingTimeout: 1200000});
+  const socket = io.connect(window.location.origin, { pingTimeout: 1200000});
 
   function registerHandler(onMessageReceived) {
     socket.on('joined', onMessageReceived);
