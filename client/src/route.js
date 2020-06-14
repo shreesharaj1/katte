@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useReducer } from "react";
 import { Provider } from 'react-redux';
 import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { HashRouter as Router, Route, Link } from "react-router-dom";
 import axios from 'axios';
 import Game from './containers/game';
 import Signup from './containers/signup';

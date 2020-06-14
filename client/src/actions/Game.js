@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const getUser = c => (dispatch) => { 
-    axios.get('http://localhost:8080/api/user/').then(response => {
+    axios.get('api/user/').then(response => {
         console.log('Get user response: ')
         console.log(response.data);
         if (response.data.user) {
@@ -21,7 +21,7 @@ const getUser = c => (dispatch) => {
 }
 
 const login = (email, password) => (dispatch) => { //request to server to add a new username/password
-  axios.post('http://localhost:8080/api/user/login', {
+  axios.post('api/user/login', {
     email,
     password
   })
@@ -51,7 +51,7 @@ const login = (email, password) => (dispatch) => { //request to server to add a 
   }
 
 const createRoom = roomObj => (dispatch) => { 
-    axios.put('http://localhost:8080/api/room/createRoom/', roomObj).then(response => {
+    axios.put('api/room/createRoom/', roomObj).then(response => {
         console.log('Get create room response: ')
         console.log(response.data);
         if (response.data.room) {
@@ -80,7 +80,7 @@ const joinRoom = (roomObj, users) => (dispatch) => {
       payload: users,
     });
 
-    axios.post('http://localhost:8080/api/room/joinRoom/', roomObj).then(response => {
+    axios.post('api/room/joinRoom/', roomObj).then(response => {
         console.log('Get create room response: ')
         console.log(response.data);
         
