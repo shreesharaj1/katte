@@ -18,10 +18,10 @@ class Card extends React.Component {
       </div>
     );
 
-  Card.propTypes = {
-    suite: PropTypes.string,
-    };
   }
 }
+Card.propTypes = {
+  suite: PropTypes.string,
+  };
 
 export default Card;

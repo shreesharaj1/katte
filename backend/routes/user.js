@@ -46,10 +46,7 @@ router.post(
     passport.authenticate('local'),
     (req, res) => {
         console.log('logged in', req.user);
-        var userInfo = {
-            username: req.user.username
-        };
-        res.send(userInfo);
+        res.send({user:req.user});
     }
 )
 
@@ -63,7 +60,7 @@ router.get('/', (req, res, next) => {
     }
 })
 
-router.post('/logout', (req, res) => {
+router.get('/logout', (req, res) => {
     if (req.user) {
         req.logout()
         res.send({ msg: 'logging out' })

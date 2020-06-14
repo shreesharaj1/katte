@@ -31,11 +31,17 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(logger('dev'));
 
+// now we can set the route path & initialize the API
+router.get('/', (req, res) => {
+  res.json({ message: 'Hello, katte!' });
+});
+
 // Use our router configuration when we call /api
 //app.use('/api', router);
 
 // Route requires
-const user = require('./routes/user')
+const user = require('./routes/user');
+const room  = require('./routes/gameRoom');
 // Sessions
 app.use(
 	session({
@@ -69,45 +75,41 @@ function setupCORS(req, res, next) {
 }
 app.all('/*', setupCORS);
 
-app.use('/user', user)
-
-// Starting Server 
-app.listen(API_PORT, () => console.log(`Listening on port ${API_PORT}`));
+app.use('/api/user', user);
+app.use('/api/room', room);
 
 
 const server = require('http').Server(app)
 const io = require('socket.io')(server)
 
-const ClientManager = require('./ClientManager')
-const ChatroomManager = require('./ChatroomManager')
 const makeHandlers = require('./handlers')
 
-const clientManager = ClientManager()
-const chatroomManager = ChatroomManager()
 
 io.on('connection', function (client) {
   const {
-    handleRegister,
-    handleJoin,
-    handleLeave,
-    handleMessage,
-    handleGetChatrooms,
-    handleGetAvailableUsers,
-    handleDisconnect
-  } = makeHandlers(client, clientManager, chatroomManager)
+    handleCreateRoom,
+    handleJoinRoom,
+    handleStartGame,
+    handleCardDrop,
+    handleDisconnect,
+    iFinished,
+  } = makeHandlers(client);
+  console.log('connecting socket..');
 
   console.log('client connected...', client.id)
-  clientManager.addClient(client)
+  //clientManager.addClient(client)
 
-  client.on('register', handleRegister)
+  //client.on('register', handleRegister)
 
-  client.on('join', handleJoin)
+  client.on('createRoom', handleCreateRoom)
 
-  client.on('leave', handleLeave)
-
-  client.on('message', handleMessage)
-
-  client.on('availableUsers', handleGetAvailableUsers)
+  client.on('joinRoom', handleJoinRoom)
+  
+  client.on('startGame', handleStartGame)
+  
+  client.on('dropCard', handleCardDrop)
+  
+  client.on('iFinished', iFinished)
 
   client.on('disconnect', function () {
     console.log('client disconnect...', client.id)
@@ -118,5 +120,8 @@ io.on('connection', function (client) {
     console.log('received error from client:', client.id)
     console.log(err)
   })
-})
+});
+
+// Starting Server 
+server.listen(API_PORT, () => console.log(`Listening on port ${API_PORT}`));
 

@@ -1,97 +1,108 @@
-function makeHandleEvent(client, clientManager, chatroomManager) {
-  function ensureExists(getter, rejectionMessage) {
-    return new Promise(function (resolve, reject) {
-      const res = getter()
-      return res
-        ? resolve(res)
-        : reject(rejectionMessage)
-    })
+import Chatroom from './Chatroom';  
+  
+function roomList() {
+    let activeRoomList = {};
+
+    function getActiveRoomList() {
+      return activeRoomList;
+    }
+
+    function addRoom(room, client) {
+      activeRoomList[room.id] = Chatroom(room, client);
+    }
+    
+    function removeRoom() {
+      delete activeRoomList[room.id];
+    }
+    
+    function getRoom(roomid) {
+      // console.log('aa',activeRoomList)
+      // console.log('bb',room);
+      // console.log('cc', activeRoomList[room.id]);
+      return activeRoomList[roomid];
+    }
+
+    return {
+      getRoom: function(roomid){ return getRoom(roomid) },
+      addRoom: function(room, client){ return addRoom(room, client) },
+      removeRoom: function(room){ return removeRoom(room) },
+      getRoomList: function(room){ return getActiveRoomList(room) }
+    }
   }
 
-  function ensureUserSelected(clientId) {
-    return ensureExists(
-      () => clientManager.getUserByClientId(clientId),
-      'select user first'
-    )
+  const roomListObj = roomList();
+
+module.exports = function (client) {
+
+  function handleCreateRoom(gameRoom, callback) {
+
+    roomListObj.addRoom(gameRoom, client);
+
+    callback(null, ['some array'])
   }
 
-  function ensureValidChatroom(chatroomName) {
-    return ensureExists(
-      () => chatroomManager.getChatroomByName(chatroomName),
-      `invalid chatroom name: ${chatroomName}`
-    )
+  function handleJoinRoom(room, callback) {
+
+    const r = roomListObj.getRoom(room.id);
+    r.addUser(room.user, client);
+    r.broadcastJoined(room.user);
+    callback(null, r.getRoomDetails());
   }
 
-  function ensureValidChatroomAndUserSelected(chatroomName) {
-    return Promise.all([
-      ensureValidChatroom(chatroomName),
-      ensureUserSelected(client.id)
-    ])
-      .then(([chatroom, user]) => Promise.resolve({ chatroom, user }))
+  
+  function handleCardDrop(cardObj, callback) {
+
+    const r = roomListObj.getRoom(cardObj.room);
+    r.broadcastCardDropped(cardObj);
+    callback(null, null);
+  }
+  
+  function handleStartGame(room, callback) {
+
+    const r = roomListObj.getRoom(room.id);
+    
+    const names = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
+	  const suits = ['s'];//,'h','c','d'];
+	  let cards = [];
+    
+    for( let s = 0; s < suits.length; s++ ) {
+        for( let n = 0; n < names.length; n++ ) {
+            cards.push( suits[s]+names[n]);
+        }
+    }
+
+    let currentIndex = cards.length, temporaryValue, randomIndex;
+
+    // While there remain elements to shuffle...
+    while (0 !== currentIndex) {
+
+      // Pick a remaining element...
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex -= 1;
+
+      // And swap it with the current element.
+      temporaryValue = cards[currentIndex];
+      cards[currentIndex] = cards[randomIndex];
+      cards[randomIndex] = temporaryValue;
+    }
+
+    r.broadcastStart(cards);
+    callback(null, r.getRoomDetails());
   }
 
-  function handleEvent(chatroomName, createEntry) {
-    return ensureValidChatroomAndUserSelected(chatroomName)
-      .then(function ({ chatroom, user }) {
-        // append event to chat history
-        const entry = { user, ...createEntry() }
-        chatroom.addEntry(entry)
+  function iFinished(user, callback) {
 
-        // notify other clients in chatroom
-        chatroom.broadcastMessage({ chat: chatroomName, ...entry })
-        return chatroom
-      })
-  }
-
-  return handleEvent
-}
-
-module.exports = function (client, clientManager, chatroomManager) {
-  const handleEvent = makeHandleEvent(client, clientManager, chatroomManager)
-
-  function handleRegister(userName, callback) {
-    if (!clientManager.isUserAvailable(userName))
-      return callback('user is not available')
-
-    const user = clientManager.getUserByName(userName)
-    clientManager.registerClient(client, user)
-
-    return callback(null, user)
-  }
-
-  function handleJoin(chatroomName, callback) {
-    const createEntry = () => ({ event: `joined ${chatroomName}` })
-
-    handleEvent(chatroomName, createEntry)
-      .then(function (chatroom) {
-        // add member to chatroom
-        chatroom.addUser(client)
-
-        // send chat history to client
-        callback(null, chatroom.getChatHistory())
-      })
-      .catch(callback)
+    const r = roomListObj.getRoom(user.room);
+    r.broadcastFinished(user);
+    callback(null, null);
   }
 
   function handleLeave(chatroomName, callback) {
     const createEntry = () => ({ event: `left ${chatroomName}` })
-
-    handleEvent(chatroomName, createEntry)
-      .then(function (chatroom) {
-        // remove member from chatroom
-        chatroom.removeUser(client.id)
-
-        callback(null)
-      })
-      .catch(callback)
   }
 
   function handleMessage({ chatroomName, message } = {}, callback) {
     const createEntry = () => ({ message })
-
-    handleEvent(chatroomName, createEntry)
-      .then(() => callback(null))
-      .catch(callback)
   }
 
   function handleGetChatrooms(_, callback) {
@@ -104,18 +115,16 @@ module.exports = function (client, clientManager, chatroomManager) {
 
   function handleDisconnect() {
     // remove user profile
-    clientManager.removeClient(client)
-    // remove member from all chatrooms
-    chatroomManager.removeClient(client)
+    console.log('dd');
+    
   }
 
   return {
-    handleRegister,
-    handleJoin,
-    handleLeave,
-    handleMessage,
-    handleGetChatrooms,
-    handleGetAvailableUsers,
-    handleDisconnect
+    handleCreateRoom,
+    handleJoinRoom,
+    handleStartGame,
+    handleCardDrop,
+    handleDisconnect,
+    iFinished,
   }
 }
