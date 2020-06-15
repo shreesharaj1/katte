@@ -3,3 +3,8 @@ node_js:
   - '12'
 services:
   - docker
+
+before_install: 
+    - docker build -t wilpat/sample-app -f Dockerfile .
+script:     
+    - docker run -e CI=true wilpat/sample-app
