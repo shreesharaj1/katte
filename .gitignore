@@ -1,3 +1,5 @@
 .gitignore
 
 node_modules/
+katte/
+client/build
