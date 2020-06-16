@@ -5,6 +5,6 @@ services:
   - docker
 
 before_install: 
-    - docker build -t -f Dockerfile .
+    - docker build -t sample:prod -f Dockerfile .
 script:     
-    - docker run -e CI=true 
+    - docker run -e CI=true sample:prod
