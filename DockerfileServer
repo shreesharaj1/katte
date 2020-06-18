@@ -4,6 +4,6 @@ WORKDIR /app
 COPY . ./
 
 RUN npm install
-
+EXPOSE 80
 # stage: 2 — the production environment
-CMD ["nodemon"]
+CMD ["npm", "run", "start"]
