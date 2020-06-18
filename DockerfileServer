@@ -6,4 +6,4 @@ COPY . ./
 RUN npm install
 EXPOSE 80
 # stage: 2 — the production environment
-CMD ["npm", "run", "start"]
+CMD ["npm", "run", "start:server"]
