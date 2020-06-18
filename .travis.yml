@@ -4,7 +4,5 @@ node_js:
 services:
   - docker
 
-before_install: 
-    - docker build -t sample:prod -f Dockerfile .
 script:     
-    - docker run -e CI=true sample:prod
+    - docker-compose -f docker-compose.yaml up --build
