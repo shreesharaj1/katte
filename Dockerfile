@@ -8,7 +8,7 @@ RUN yarn build
 
 COPY . ./
 RUN npm install
-RUN npm run start:server
+CMD ["npm",  "run",  "start:server"]
 
 # stage: 2 — the production environment
 FROM nginx:1.16
