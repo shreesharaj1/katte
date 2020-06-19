@@ -4,10 +4,8 @@ node_js:
 services:
   - docker
 
-script:     
-    - docker-compose -f docker-compose.yaml up --build
-
 deploy:
   provider: heroku
   api_key: 2fc8009c-0ce5-44bf-b6f7-2cc0c13912d4
   app: katte-game
+  script: docker-compose -f docker-compose.yaml up --build
