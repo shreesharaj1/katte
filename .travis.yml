@@ -5,4 +5,4 @@ services:
   - docker
 
 script:     
-    - docker-compose -f docker-compose.yaml up --build
+    - docker build -t test:1 .
