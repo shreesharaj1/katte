@@ -6,8 +6,8 @@ services:
   - docker
 
 image: shreesharaj/katte:prod
-build: 
-  - docker-compose -f docker-compose.yaml -p shreesharaj/katte:prod up --build
+before-install: 
+  - docker-compose -f docker-compose.yaml -p shreesharaj/katte:prod up build
 deploy:
   provider: script
   script: bash docker_bash
