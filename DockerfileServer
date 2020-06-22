@@ -1,6 +1,6 @@
 # stage: 1
-FROM node:12 as react-build
-WORKDIR /app
+FROM node:12 as backend-build
+WORKDIR /backend
 COPY . ./
 
 RUN npm install

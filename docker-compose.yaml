@@ -11,7 +11,7 @@ services:
     #  - "9000:9000"
     restart: unless-stopped
     volumes:
-      - ./node_modules:/app/node_modules
+      - ./node_modules:/backend/node_modules
   frontend:
     build:
       context: .
