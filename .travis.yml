@@ -4,10 +4,10 @@ node_js:
 
 services:
   - docker
-  
+
 image: shreesharaj/katte:prod
-before_install: 
-  - docker-compose -f docker-compose.yaml -p shreesharaj/katte:prod build
+build: 
+  - docker-compose -f docker-compose.yaml -p shreesharaj/katte:prod up --build
 deploy:
   provider: script
   script: bash docker_bash
