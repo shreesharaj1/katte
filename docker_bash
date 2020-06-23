@@ -4,4 +4,4 @@ docker ps -a
 docker images
 docker push shreesharaj/katte:frontend
 docker push shreesharaj/katte:backend
-docker push shreesharaj/katte:proxy
+docker push shreesharaj/katte:prod
