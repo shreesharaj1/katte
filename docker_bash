@@ -2,6 +2,6 @@
 echo "$HEROKU_TOKEN" | docker login --username=_ --password-stdin registry.heroku.com
 docker ps -a
 docker images
-docker push shreesharaj/katte:frontend
-docker push shreesharaj/katte:backend
-docker push shreesharaj/katte:prod
+docker push registry.heroku.com/shreesharaj/katte:frontend
+docker push registry.heroku.com/shreesharaj/katte:backend
+docker push registry.heroku.com/shreesharaj/katte:prod
