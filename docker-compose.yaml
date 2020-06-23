@@ -3,7 +3,7 @@ version: "3.3"
 
 services:
   backend:
-    image: registry.heroku.com/katte:backend
+    image: registry.heroku.com/shreesharaj/katte:backend
     build:
       context: .
       dockerfile: DockerfileServer
@@ -14,7 +14,7 @@ services:
     volumes:
       - ./node_modules:/backend/node_modules
   frontend:
-    image: registry.heroku.com/katte:frontend
+    image: registry.heroku.com/shreesharaj/katte:frontend
     build:
       context: .
       dockerfile: Dockerfile
@@ -26,7 +26,7 @@ services:
     volumes:
       - ./client/node_modules:/app/node_modules
   proxy:
-    image: registry.heroku.com/katte:prod
+    image: registry.heroku.com/shreesharaj/katte:prod
     restart: unless-stopped
     ports:
       - "8080:80"
