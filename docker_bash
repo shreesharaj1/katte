@@ -1,5 +1,5 @@
 #!/bin/bash
-echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+echo "$HEROKU_TOKEN" | docker login --username=_ --password-stdin registry.heroku.com
 docker ps -a
 docker images
 docker push shreesharaj/katte:frontend
