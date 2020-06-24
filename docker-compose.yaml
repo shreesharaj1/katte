@@ -25,7 +25,7 @@ services:
       CHOKIDAR_USEPOLLING: "true"
     volumes:
       - ./client/node_modules:/app/node_modules
-  proxy:
+  prod:
     image: registry.heroku.com/shreesharaj
     restart: unless-stopped
     ports:
