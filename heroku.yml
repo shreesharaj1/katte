@@ -1,0 +1,15 @@
+language: node_js
+node_js: 
+  - '12'
+
+services:
+  - docker
+
+image: shreesharaj/katte:prod
+before-install: 
+  - docker-compose -f docker-compose.yaml -p shreesharaj/katte:prod up --build --no-start
+deploy:
+  provider: script
+  script: bash docker_bash
+  on:
+    branch: master
