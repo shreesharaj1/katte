@@ -3,7 +3,7 @@ version: "3.3"
 
 services:
   backend:
-    image: registry.heroku.com/shreesharaj:backend
+    image: registry.heroku.com/shreesharaj/katte:backend
     build:
       context: .
       dockerfile: DockerfileServer
@@ -14,7 +14,7 @@ services:
     volumes:
       - ./node_modules:/backend/node_modules
   frontend:
-    image: registry.heroku.com/shreesharaj:frontend
+    image: registry.heroku.com/shreesharaj/katte:frontend
     build:
       context: .
       dockerfile: Dockerfile
