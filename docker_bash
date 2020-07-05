@@ -3,7 +3,7 @@ echo "$DOCKER_PASSWORD" | docker login --username=$DOCKER_USERNAME --password-st
 echo "$HEROKU_TOKEN" | docker login --username=_ --password-stdin registry.heroku.com
 docker ps -a
 docker images
+docker rmi --force 'image registry.heroku.com/shreesharaj/katte:frontend registry.heroku.com/shreesharaj/katte:backend'
 docker push registry.heroku.com/shreesharaj/katte:frontend
 docker push registry.heroku.com/shreesharaj/katte:backend
-docker run -p 8080:8000 -e PORT=8080 registry.heroku.com/shreesharaj/katte:frontend
 #docker push registry.heroku.com/shreesharaj/katte:prod
