@@ -6,6 +6,7 @@ services:
   - docker
 
 before-install: 
+  - docker login --username=_ --password=$HEROKU_TOKEN registry.heroku.com
   - docker rmi --force registry.heroku.com/shreesharaj/katte:frontend registry.heroku.com/shreesharaj/katte:backend registry.heroku.com/shreesharaj/katte:prod 
   - docker-compose -f docker-compose.yaml up --build --no-start
 deploy:
