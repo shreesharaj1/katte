@@ -5,4 +5,5 @@ docker ps -a
 docker images
 docker push registry.heroku.com/shreesharaj/katte:frontend
 docker push registry.heroku.com/shreesharaj/katte:backend
+docker run -p 8080:8000 -e PORT=8080 registry.heroku.com/shreesharaj/katte:frontend
 #docker push registry.heroku.com/shreesharaj/katte:prod
