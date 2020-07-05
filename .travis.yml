@@ -6,6 +6,7 @@ services:
   - docker
 
 before-install: 
+  script: docker_bash_before
   - docker-compose -f docker-compose.yaml up --build --no-start
 deploy:
   provider: script
